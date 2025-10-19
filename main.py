@@ -1,10 +1,24 @@
+from stats import character_occurneces, get_num_words, sorted_dictionarys
+import sys
+
+
 def main():
-    book = get_book_text("./books/frankenstein.txt")
-    num_words = get_text_wordcount(book)
+    args = sys.argv
+    if len(args) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    book_path = args[1]
+    book = get_book_text(book_path)
+    num_words = get_num_words(book)
+    num_chars = character_occurneces(book)
+    report = sorted_dictionarys(num_chars)
+
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {book_path}")
+    print("----------- Word Count ----------")
     print(f"Found {num_words} total words")
-<<<<<<< Updated upstream
-=======
-    print("--------- Charact"./books/frankenstein.txt"er Count -------")
+    print("--------- Character Count -------")
     print(sorted_report(report))
     print("============= END ===============")
 
@@ -18,16 +32,11 @@ def sorted_report(list: list):
         report += f"{char}: {item["num"]}\n"
 
     return report
->>>>>>> Stashed changes
 
 
 def get_book_text(path):
     with open(path) as book:
         return book.read()
-
-
-def get_text_wordcount(text: str):
-    return len(text.split())
 
 
 if __name__ == "__main__":
